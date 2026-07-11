@@ -65,12 +65,6 @@
     enableFishIntegration = true;
   };
 
-  # Very good fuzzy finder
-  programs.fzf = {
-    enable = true;
-    enableFishIntegration = true;
-  };
-
   # Catppuccin Theme
   # This will configure the following programs (if managed with home-manager)
   # - atuin
@@ -78,7 +72,6 @@
   # - eza
   # - firefox
   # - fish
-  # - fzf
   # - helix
   # - kitty
   # - starship

@@ -1,14 +1,13 @@
-{ lib
-, stdenv
-, python3Packages
-, fetchFromGitHub
-, qt6
-, vulkan-loader
-, libGL
-, versionCheckHook
-, nix-update-script
+{
+  lib,
+  stdenv,
+  python3Packages,
+  fetchFromGitHub,
+  qt6,
+  vulkan-loader,
+  libGL,
+  versionCheckHook,
 }:
-
 python3Packages.buildPythonApplication (finalAttrs: {
   pname = "negpy";
   version = "0.36.0";
@@ -25,7 +24,9 @@ python3Packages.buildPythonApplication (finalAttrs: {
     "imagecodecs"
     "imageio"
     "numba"
+    "numpy"
     "opencv-python-headless"
+    "pillow"
     "qtawesome"
     "tifffile"
     "wgpu"
@@ -39,15 +40,17 @@ python3Packages.buildPythonApplication (finalAttrs: {
       --replace-fail '[tool.setuptools]' '[tool.setuptools.packages.find]'
   '';
 
-  nativeBuildInputs = [ qt6.wrapQtAppsHook ];
+  nativeBuildInputs = [qt6.wrapQtAppsHook];
 
-  buildInputs = [
-    qt6.qtbase
-  ] ++ lib.optionals stdenv.hostPlatform.isLinux [
-    qt6.qtwayland
-  ];
+  buildInputs =
+    [
+      qt6.qtbase
+    ]
+    ++ lib.optionals stdenv.hostPlatform.isLinux [
+      qt6.qtwayland
+    ];
 
-  build-system = [ python3Packages.setuptools ];
+  build-system = [python3Packages.setuptools];
 
   dependencies = with python3Packages; [
     imagecodecs
@@ -67,13 +70,13 @@ python3Packages.buildPythonApplication (finalAttrs: {
     wgpu-py
   ];
 
-  pythonImportsCheck = [ "negpy" ];
+  pythonImportsCheck = ["negpy"];
 
   dontWrapQtApps = true;
   preFixup = ''
     makeWrapperArgs+=(
       ''${qtWrapperArgs[@]}
-      --prefix LD_LIBRARY_PATH : ${lib.makeLibraryPath [ vulkan-loader libGL ]}
+      --prefix LD_LIBRARY_PATH : ${lib.makeLibraryPath [vulkan-loader libGL]}
     )
   '';
 
@@ -93,6 +96,11 @@ python3Packages.buildPythonApplication (finalAttrs: {
     site_packages=$out/lib/${python3Packages.python.libPrefix}/site-packages
     cp -r icc media crosstalk gear "$site_packages/"
 
+    # Shader files (*.wgsl) live inside negpy but setuptools won't include
+    # non-Python files without package_data config.  Merge them into the
+    # installed negpy package so get_resource_path() finds them.
+    cp -r negpy/features "$site_packages/negpy/"
+
     # Desktop entry
     install -Dm644 negpy.desktop "$out/share/applications/negpy.desktop"
     substituteInPlace "$out/share/applications/negpy.desktop" \
@@ -103,9 +111,7 @@ python3Packages.buildPythonApplication (finalAttrs: {
 
   # Tests require GPU and Qt — cannot run in the Nix sandbox.
   doCheck = false;
-  nativeCheckInputs = [ versionCheckHook ];
-
-  passthru.updateScript = nix-update-script { };
+  nativeCheckInputs = [versionCheckHook];
 
   meta = with lib; {
     description = "Tool for processing film negatives with film-physics simulation";
@@ -125,7 +131,7 @@ python3Packages.buildPythonApplication (finalAttrs: {
     changelog = "https://github.com/marcinz606/NegPy/releases/tag/${finalAttrs.version}";
     license = licenses.gpl3Only;
     mainProgram = "negpy";
-    maintainers = with maintainers; [ ];
+    maintainers = with maintainers; [];
     platforms = platforms.linux;
   };
 })

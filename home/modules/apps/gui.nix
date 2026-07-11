@@ -8,18 +8,13 @@
     map config.lib.nixGL.wrap [
       onlyoffice-desktopeditors
       slack
-      musescore
-      muse-sounds-manager
-      zotero
       obsidian
       qucs-s
-      paraview
       cockatrice
       remmina
       prusa-slicer
       veracrypt
       qtpass
-      element-desktop
       signal-desktop
       zoom-us
     ];

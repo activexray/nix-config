@@ -51,7 +51,5 @@
 
     # science/data
     julia-bin
-
-    zulip-term
   ];
 }
