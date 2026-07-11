@@ -92,6 +92,7 @@
       nixgl.overlay
       nur.overlays.default
       (import ./overlays/cockatrice.nix)
+      (import ./overlays/negpy.nix)
       llm-agents.overlays.default
     ];
 
