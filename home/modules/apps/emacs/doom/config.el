@@ -8,7 +8,8 @@
 (setq-default vterm-shell (executable-find "fish"))
 
 ;; Fix SSH Agent
-(setenv "SSH_AUTH_SOCK" (string-trim (shell-command-to-string "gpgconf --list-dirs agent-ssh-socket")))
+(when (executable-find "gpgconf")
+  (setenv "SSH_AUTH_SOCK" (string-trim (shell-command-to-string "gpgconf --list-dirs agent-ssh-socket"))))
 
 ;; Make sure the theme is loaded
 (use-package! catppuccin-theme
@@ -68,12 +69,6 @@
 
 (setq org-directory "~/sync/org/")
 
-(use-package! smartparens
-  :hook ((scheme-mode . smartparens-strict-mode)
-         (clojure-mode . smartparens-strict-mode)
-         (lisp-mode . smartparens-strict-mode)
-         (emacs-lisp-mode . smartparens-strict-mode)))
-
 (after! cider
   (setq cider-repl-pop-to-buffer-on-connect t))
 
@@ -85,7 +80,10 @@
 (setq mouse-wheel-tilt-scroll t)
 (setq mouse-wheel-flip-direction t)
 
-;; pdf-tools for latex preview
+;; Fix error when there are no staged changes
+(after! diff-hl
+  (advice-add 'diff-hl-changes-from-buffer :around
+              #'ignore-errors))
 (setq +latex-viewers '(pdf-tools))
 
 ;; TOML
@@ -106,7 +104,7 @@
                    :procMacro (:enable t)
                    :inlayHints (:chainingHints (:enable t)
                                 :maxLength 25))
-                  :nil
+                  nil
                   (:formatting (:command ["alejandra" "--"])))))
 
 (after! eglot
