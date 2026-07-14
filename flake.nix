@@ -93,7 +93,7 @@
       nur.overlays.default
       (import ./overlays/cockatrice.nix)
       (import ./overlays/negpy.nix)
-      llm-agents.overlays.default
+      llm-agents.overlays.shared-nixpkgs
     ];
 
     # A function to automatically set the hostname and hostname-derived config
