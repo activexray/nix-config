@@ -6,7 +6,6 @@
   qt6,
   vulkan-loader,
   libGL,
-  versionCheckHook,
 }:
 python3Packages.buildPythonApplication (finalAttrs: {
   pname = "negpy";
@@ -46,7 +45,7 @@ python3Packages.buildPythonApplication (finalAttrs: {
     [
       qt6.qtbase
     ]
-    ++ lib.optionals stdenv.hostPlatform.isLinux [
+    ++ lib.optionals stdenv.isLinux [
       qt6.qtwayland
     ];
 
@@ -101,6 +100,10 @@ python3Packages.buildPythonApplication (finalAttrs: {
     # installed negpy package so get_resource_path() finds them.
     cp -r negpy/features "$site_packages/negpy/"
 
+    # VERSION file — get_app_version() walks 4 levels up from
+    # negpy/kernel/system/version.py to $site_packages/ and reads it there.
+    cp VERSION "$site_packages/"
+
     # Desktop entry
     install -Dm644 negpy.desktop "$out/share/applications/negpy.desktop"
     substituteInPlace "$out/share/applications/negpy.desktop" \
@@ -111,7 +114,6 @@ python3Packages.buildPythonApplication (finalAttrs: {
 
   # Tests require GPU and Qt — cannot run in the Nix sandbox.
   doCheck = false;
-  nativeCheckInputs = [versionCheckHook];
 
   meta = with lib; {
     description = "Tool for processing film negatives with film-physics simulation";
