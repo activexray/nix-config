@@ -293,8 +293,12 @@
       # 8BitDo Ultimate Bluetooth Controller (boot HID + receiver)
       SUBSYSTEM=="hidraw", ATTRS{idProduct}=="3208", ATTRS{idVendor}=="2dc8", TAG+="uaccess"
       SUBSYSTEM=="hidraw", ATTRS{idProduct}=="3109", ATTRS{idVendor}=="2dc8", TAG+="uaccess"
+
       # Give hidraw access to all of plugdev
       KERNEL=="hidraw*", SUBSYSTEM=="hidraw", GROUP="plugdev", MODE="0666", TAG+="uaccess"
+
+      # SCSI (Scanners)
+      KERNEL=="sg*", SUBSYSTEM=="scsi_generic", ATTRS{ieee1394_id}=="*", GROUP="plugdev", MODE="0666"
     '';
 
   # Enable fwupmgr
