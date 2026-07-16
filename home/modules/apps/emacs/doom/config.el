@@ -79,11 +79,6 @@
 ;; Enable horizontal scrolling
 (setq mouse-wheel-tilt-scroll t)
 (setq mouse-wheel-flip-direction t)
-
-;; Fix error when there are no staged changes
-(after! diff-hl
-  (advice-add 'diff-hl-changes-from-buffer :around
-              #'ignore-errors))
 (setq +latex-viewers '(pdf-tools))
 
 ;; TOML
