@@ -1,0 +1,20 @@
+--- a/cockatrice/src/interface/widgets/server/game_filter_configs.h
++++ b/cockatrice/src/interface/widgets/server/game_filter_configs.h
+@@ -1,5 +1,6 @@
+ #ifndef COCKATRICE_GAME_FILTER_CONFIGS_H
+ #define COCKATRICE_GAME_FILTER_CONFIGS_H
+ 
++#include <QSet>
+ #include <QTime>
+ 
+ /**
+--- a/cockatrice/src/interface/widgets/settings_page/appearance_settings_page.cpp
++++ b/cockatrice/src/interface/widgets/settings_page/appearance_settings_page.cpp
+@@ -8,6 +8,7 @@
+ #include <QDesktopServices>
+ #include <QGridLayout>
+ #include <QMessageBox>
++#include <QUrl>
+ #include <QTimer>
+ 
+ AppearanceSettingsPage::AppearanceSettingsPage()

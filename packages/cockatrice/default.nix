@@ -10,14 +10,16 @@
 in
   stdenv.mkDerivation (finalAttrs: {
     pname = "cockatrice";
-    version = "2026-05-08-Release-3.0.0";
+    version = "2026-06-26-Release-3.0.2";
 
     src = fetchFromGitHub {
       owner = "Cockatrice";
       repo = "Cockatrice";
       rev = finalAttrs.version;
-      sha256 = "sha256-jLHGWtHbJTQ5Gefrnd8aUq1K3f2QzyE4YU5bW//gH4Y=";
+      sha256 = "sha256-qn8pnC04uN994qLK4oXc3IiTpPMT3/gqHHBaEDkjsr4=";
     };
+
+    patches = [ ./missing-qset-header.patch ];
 
     nativeBuildInputs = [
       cmake
