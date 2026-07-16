@@ -17,5 +17,6 @@
       qtpass
       signal-desktop
       zoom-us
+      ghidra
     ];
 }
