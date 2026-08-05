@@ -21,4 +21,6 @@
       };
     };
   };
+
+  xdg.configFile."ccstatusline/settings.json".source = ./ccstatusline-config.json;
 }
