@@ -9,7 +9,7 @@
     enable = true;
     package = pkgs.pass.withExtensions (ext: with ext; [pass-otp]);
     settings = {
-      PASSWORD_STORE_DIR = "${config.home.homeDirectory}/sync/.password-store";
+      PASSWORD_STORE_DIR = "${config.home.homeDirectory}/.password-store";
     };
   };
 
