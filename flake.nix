@@ -151,7 +151,6 @@
         system = "x86_64-linux";
         config = {
           allowUnfree = true;
-          cudaSupport = true;
         };
         overlays = overlays;
       };
