@@ -4,6 +4,7 @@
   # Sources for all nix flakes that make up the config
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
 
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
@@ -64,6 +65,7 @@
   outputs = {
     self,
     nixpkgs,
+    nixpkgs-stable,
     home-manager,
     hardware,
     nixgl,
@@ -76,6 +78,11 @@
     ...
   } @ inputs: let
     inherit (self) outputs;
+
+    stablePkgs = import nixpkgs-stable {
+      system = "x86_64-linux";
+      config.allowUnfree = true;
+    };
 
     homeModules = [
       nix-doom.homeModule
@@ -105,7 +112,7 @@
         {
           home-manager = {
             # Just pass the whole input output sets to HM
-            extraSpecialArgs = {inherit inputs outputs nixgl;};
+            extraSpecialArgs = {inherit inputs outputs nixgl stablePkgs;};
             useUserPackages = true;
             useGlobalPkgs = true;
             backupFileExtension = "backup";
@@ -124,7 +131,7 @@
       nixpkgs.lib.nixosSystem {
         system = cfg.system or "x86_64-linux";
         modules = (commonModules name) ++ (cfg.modules or []);
-        specialArgs = {inherit inputs outputs;};
+        specialArgs = {inherit inputs outputs stablePkgs;};
       };
 
     # The systems we'll configure
@@ -158,7 +165,7 @@
 
       # Passing along nixgl to the standalone
       extraSpecialArgs = {
-        inherit nixgl;
+        inherit nixgl stablePkgs;
       };
     };
 

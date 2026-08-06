@@ -9,14 +9,14 @@
 }:
 python3Packages.buildPythonApplication (finalAttrs: {
   pname = "negpy";
-  version = "0.36.0";
+  version = "0.38.0";
   pyproject = true;
 
   src = fetchFromGitHub {
-    owner = "marcinz606";
+    owner = "activexray";
     repo = "NegPy";
-    tag = finalAttrs.version;
-    hash = "sha256-ku6Hj0aNlTBOuNjUZqdghMCKMHPxzmkqDKo7B4Pe/Cw=";
+    rev = "e6ed5d15befb13501d30b37ccd8c592fde9b3099";
+    hash = "";
   };
 
   pythonRelaxDeps = [

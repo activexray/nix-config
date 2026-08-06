@@ -1,5 +1,11 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
+;; Workaround: doom-localleader-key is void before which-key-mode activates
+;; (upstream timing issue Jul 2026)
+(unless (boundp 'doom-localleader-key)
+  (setq doom-localleader-key "SPC m"
+        doom-localleader-alt-key "M-SPC m"))
+
 ;; Personal information
 (setq user-full-name "Kiran Shila" user-mail-address "me@kiranshila.com")
 

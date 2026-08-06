@@ -19,7 +19,7 @@ in
       sha256 = "sha256-qn8pnC04uN994qLK4oXc3IiTpPMT3/gqHHBaEDkjsr4=";
     };
 
-    patches = [ ./missing-qset-header.patch ];
+    patches = [./missing-qset-header.patch];
 
     nativeBuildInputs = [
       cmake
