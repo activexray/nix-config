@@ -9,13 +9,13 @@
 }:
 python3Packages.buildPythonApplication (finalAttrs: {
   pname = "negpy";
-  version = "0.38.0";
+  version = "0.49.0";
   pyproject = true;
 
   src = fetchFromGitHub {
-    owner = "activexray";
+    owner = "marcinz606";
     repo = "NegPy";
-    rev = "e6ed5d15befb13501d30b37ccd8c592fde9b3099";
+    tag = finalAttrs.version;
     hash = "";
   };
 
@@ -133,7 +133,6 @@ python3Packages.buildPythonApplication (finalAttrs: {
     changelog = "https://github.com/marcinz606/NegPy/releases/tag/${finalAttrs.version}";
     license = licenses.gpl3Only;
     mainProgram = "negpy";
-    maintainers = with maintainers; [];
     platforms = platforms.linux;
   };
 })
