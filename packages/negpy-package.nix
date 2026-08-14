@@ -9,14 +9,14 @@
 }:
 python3Packages.buildPythonApplication (finalAttrs: {
   pname = "negpy";
-  version = "0.49.0";
+  version = "0.50.0";
   pyproject = true;
 
   src = fetchFromGitHub {
     owner = "marcinz606";
     repo = "NegPy";
     tag = finalAttrs.version;
-    hash = "";
+    hash = "sha256-9UmX+z9P0rZT4p2R0acvkZMy4afz/SlobgGkyYLEYm8=";
   };
 
   pythonRelaxDeps = [
@@ -66,7 +66,10 @@ python3Packages.buildPythonApplication (finalAttrs: {
     qtawesome
     rawpy
     tifffile
-    wgpu-py
+    # nixpkgs' pname is "wgpu-py" but upstream's pyproject.toml declares
+    # name = "wgpu", so pythonMetadataCheckPhase can't find dist-info
+    # metadata under "wgpu-py" and fails the build. Skip that check.
+    (wgpu-py.overrideAttrs {dontCheckPythonMetadata = true;})
   ];
 
   pythonImportsCheck = ["negpy"];
