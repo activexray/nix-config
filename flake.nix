@@ -188,6 +188,7 @@
         '';
     in {
       kicad = nixGLWrap (pkgs.kicad-small.override {compressStep = false;});
+      negpy = nixGLWrap pkgs.negpy;
     };
 
     # `nix fmt` formatter (also used by the claude-code PostToolUse hook)
