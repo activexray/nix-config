@@ -60,6 +60,14 @@
     llm-agents = {
       url = "github:numtide/llm-agents.nix";
     };
+
+    # negpy
+    negpy = {
+      url = "github:marcinz606/NegPy";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
   };
 
   outputs = {
@@ -75,6 +83,7 @@
     catppuccin,
     nixcord,
     llm-agents,
+    negpy,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -99,7 +108,6 @@
       nixgl.overlay
       nur.overlays.default
       (import ./overlays/cockatrice.nix)
-      (import ./overlays/negpy.nix)
       llm-agents.overlays.shared-nixpkgs
     ];
 
@@ -187,8 +195,9 @@
           done
         '';
     in {
-      kicad = nixGLWrap (pkgs.kicad-small.override {compressStep = false;});
-      negpy = nixGLWrap pkgs.negpy;
+      # flake outputs so we can nix run .#whatever
+      # kicad = nixGLWrap (pkgs.kicad-small.override {compressStep = false;});
+      # negpy = nixGLWrap pkgs.negpy;
     };
 
     # `nix fmt` formatter (also used by the claude-code PostToolUse hook)

@@ -13,6 +13,7 @@ in {
   imports = [
     ./modules
     ./modules/apps/openrct2.nix
+    ./modules/apps/negpy.nix
   ];
 
   # Set my home directory
