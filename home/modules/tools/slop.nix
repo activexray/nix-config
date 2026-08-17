@@ -19,6 +19,10 @@
         command = "${pkgs.llm-agents.ccstatusline}/bin/ccstatusline";
         padding = 0;
       };
+      attribution = {
+        commit = "";
+        pr = "";
+      };
     };
   };
 
