@@ -287,6 +287,7 @@
       "0765" # X-Rite i1 Display Pro
       "320f" # Rainy75 Keyboard
       "2e8a" # PicoProbe
+      "04b0" # Nikon
     ]
     + ''
 

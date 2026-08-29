@@ -27,7 +27,6 @@ in {
 
   # Kix-specific packages
   home.packages = with pkgs; [
-    negpy
     protonup-qt
     via
   ];
