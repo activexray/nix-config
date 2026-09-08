@@ -131,6 +131,7 @@
     ./apps/kicad.nix
     ./apps/kitty.nix
     ./apps/openscad.nix
+    ./apps/qtpass.nix
     ./tools/cli.nix
     ./tools/fish.nix
     ./tools/git.nix

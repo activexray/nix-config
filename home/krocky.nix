@@ -47,6 +47,18 @@ in {
     export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
   '';
 
+  # GNOME Keyring's own SSH-agent component autostarts at
+  # X-GNOME-Autostart-Phase=PreDisplayServer -- before almost everything
+  # else in the session -- and claims SSH_AUTH_SOCK for the whole
+  # graphical session, ahead of gpg-agent's, which is why the above is
+  # necessary for shells too. This only disables the ssh-agent piece;
+  # secret storage (saved passwords, etc.) is a separate GNOME Keyring
+  # component and keeps running.
+  xdg.configFile."autostart/gnome-keyring-ssh.desktop".text = ''
+    [Desktop Entry]
+    Hidden=true
+  '';
+
   # Krocky-specific packages
   home.packages = [(config.lib.nixGL.wrap pkgs.looking-glass-client)];
 

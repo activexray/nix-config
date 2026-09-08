@@ -14,7 +14,6 @@
       remmina
       prusa-slicer
       veracrypt
-      qtpass
       signal-desktop
       zoom-us
       ghidra
