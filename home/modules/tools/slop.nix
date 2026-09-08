@@ -22,6 +22,9 @@
       attribution = {
         commit = "";
         pr = "";
+        # commit/pr only blank the Co-Authored-By text; the Claude-Session
+        # trailer on web and Remote Control sessions is its own toggle
+        sessionUrl = false;
       };
     };
   };
