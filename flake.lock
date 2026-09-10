@@ -729,7 +729,8 @@
         "nixgl": "nixgl",
         "nixpkgs": "nixpkgs_6",
         "nixpkgs-stable": "nixpkgs-stable",
-        "nur": "nur"
+        "nur": "nur",
+        "tether": "tether"
       }
     },
     "systems": {
@@ -774,6 +775,26 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
+        "type": "github"
+      }
+    },
+    "tether": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1789061801,
+        "narHash": "sha256-HpkpMujtYX/OdIDSihVs6Sor0358o+FrNbToKh944Vs=",
+        "owner": "zackb",
+        "repo": "tether",
+        "rev": "2e3369dfe508f535ee42a42ebe89eeafeeeb283a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "zackb",
+        "repo": "tether",
         "type": "github"
       }
     },

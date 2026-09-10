@@ -30,6 +30,7 @@
     htop
     helix
     nix-output-monitor
+    gh
 
     # Wine
     wineWow64Packages.stable

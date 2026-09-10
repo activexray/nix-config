@@ -68,6 +68,13 @@
         nixpkgs.follows = "nixpkgs";
       };
     };
+
+    # Tether - iPhone/Linux Continuity (NixOS module for wifi/bluetooth wiring;
+    # the package itself already lives in nixpkgs as pkgs.tether)
+    tether = {
+      url = "github:zackb/tether";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -84,6 +91,7 @@
     nixcord,
     llm-agents,
     negpy,
+    tether,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -102,6 +110,7 @@
     nixosModules = [
       determinate.nixosModules.default
       catppuccin.nixosModules.catppuccin
+      tether.nixosModules.default
     ];
 
     overlays = [
@@ -109,6 +118,7 @@
       nur.overlays.default
       (import ./overlays/cockatrice.nix)
       llm-agents.overlays.shared-nixpkgs
+      tether.overlays.default
     ];
 
     # A function to automatically set the hostname and hostname-derived config

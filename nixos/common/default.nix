@@ -181,6 +181,15 @@
     ];
   };
 
+  # GitHub token for flake input fetches (raises the unauthenticated API
+  # rate limit that `nix flake update`/`github:` fetchers otherwise hit).
+  # The token itself is never committed: this just pulls in a machine-local
+  # file if one exists. Populate it once per machine with:
+  #   sudo install -m 600 /dev/stdin /etc/nix/github-token.conf <<< "access-tokens = github.com=$(gh auth token)"
+  nix.extraOptions = ''
+    !include-ignore-missing /etc/nix/github-token.conf
+  '';
+
   users = {
     # Define the plugdev group
     groups.plugdev = {};
@@ -343,4 +352,18 @@
 
   # Tailscale
   services.tailscale.enable = true;
+
+  # iOS continuity for linux
+  programs.tether = {
+    enable = true;
+    wifi = {
+      enable = true;
+      openFirewall = true;
+    };
+    bluetooth = {
+      enable = true;
+      adapters = ["hci0"];
+    };
+    # native messaging extensions handled in home manager
+  };
 }
