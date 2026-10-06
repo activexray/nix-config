@@ -134,3 +134,22 @@
     :desc "Compile document" "c" #'typst-ts-compile
     :desc "Preview document" "p" #'typst-ts-mode-preview
     :desc "Watch document" "w" #'typst-ts-watch-mode)))
+
+;; Spade HDL: local tree-sitter mode (spade-ts-mode.el, grammar from Nix) and
+;; the language server via `swim lsp', which builds the server from the
+;; project's pinned compiler. swim comes from the project's direnv dev shell.
+(load! "spade-ts-mode")
+(add-hook 'spade-ts-mode-local-vars-hook #'lsp! 'append)
+(after! eglot
+  (add-to-list 'eglot-server-programs '(spade-ts-mode . ("swim" "lsp"))))
+
+(map! :after spade-ts-mode
+      :localleader
+      :map spade-ts-mode-map
+      :desc "swim build" "b" #'spade-swim-build
+      :desc "swim synth" "s" #'spade-swim-synth
+      :desc "swim pnr" "p" #'spade-swim-pnr
+      :desc "swim upload" "u" #'spade-swim-upload
+      :desc "swim test" "t" #'spade-swim-test
+      :desc "swim clean" "c" #'spade-swim-clean
+      :desc "nextpnr GUI" "g" #'spade-swim-nextpnr-gui)

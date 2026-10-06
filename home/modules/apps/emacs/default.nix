@@ -50,6 +50,20 @@
       sha256 = "sha256-2+Ii4uqqmFkuRQEarCUY7dNaR2uk3cvcWleE91Gs5a8=";
     };
   };
+
+  # Required by spade-ts-mode (doom/spade-ts-mode.el). Newer than nixpkgs'
+  # tree-sitter-spade; same commit the Zed extension's highlight queries target.
+  spade-grammar = pkgs.tree-sitter.buildGrammar {
+    language = "spade";
+    version = "unstable-2026-06-22";
+    src = pkgs.fetchFromGitea {
+      domain = "codeberg.org";
+      owner = "spade-lang";
+      repo = "tree-sitter-spade";
+      rev = "d094381a5b3ad7fbff9dc850471479a391b62d1f";
+      hash = "sha256-CF3ZDeG359PgMMvD0AfjPMvWj6egIJJ/6g1tK73B0Bc=";
+    };
+  };
 in {
   # Doom Emacs
   programs.doom-emacs = {
@@ -85,6 +99,7 @@ in {
               clojure-ts-grammar
               typst-grammar
               scad-grammar
+              spade-grammar
             ]))
       ];
     experimentalFetchTree = true;
