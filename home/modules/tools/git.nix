@@ -4,7 +4,7 @@
     enable = true;
     lfs.enable = true;
     signing = {
-      key = null;
+      key = "91B5B58D98E03214";
       signByDefault = true;
     };
     settings = {

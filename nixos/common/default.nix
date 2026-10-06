@@ -169,7 +169,6 @@
       "https://kiranshila.cachix.org"
       "https://cache.numtide.com"
       "https://cache.nixos-cuda.org"
-      "https://cuda-maintainers.cachix.org"
     ];
     trusted-public-keys = [
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
@@ -177,7 +176,6 @@
       "kiranshila.cachix.org-1:S0sidekrlCDb6OdMXMuzj6l6UdI32SyrHBBfAVkA8Mk="
       "niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g="
       "cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M="
-      "cuda-maintainers.cachix.org-1:cc5BfG5nG4s2KB41FttLbB3PRz9sENdSB1sGncPcC2E="
     ];
   };
 
