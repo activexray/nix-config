@@ -10,7 +10,7 @@
       primary = lib.mkDefault true;
       address = "me@kiranshila.com";
       userName = "me@kiranshila.com";
-      realName = "Kiran Shila";
+      realName = "Kira Shila";
       passwordCommand = "${pkgs.pass}/bin/pass email/me@kiranshila.com";
       imap = {
         host = "imap.migadu.com";
@@ -26,11 +26,11 @@
     "kshila@caltech.edu" = {
       address = "kshila@caltech.edu";
       userName = "kshila@caltech.edu";
-      realName = "Kiran Shila";
+      realName = "Kira Shila";
       signature = {
         showSignature = "append";
         text = ''
-          Dr. Kiran Shila (they/them/theirs)
+          Dr. Kira Shila (they/them/theirs)
           Research Engineer
           Deep Synoptic Array | Caltech
           T: +1 813-422-8343

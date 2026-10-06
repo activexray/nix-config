@@ -1,5 +1,5 @@
 {
-  description = "Kiran's NixOS Config";
+  description = "Kira's NixOS Config";
 
   # Sources for all nix flakes that make up the config
   inputs = {

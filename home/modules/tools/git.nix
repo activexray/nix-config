@@ -10,7 +10,7 @@
     settings = {
       user = {
         email = "me@kiranshila.com";
-        name = "Kiran Shila";
+        name = "Kira Shila";
       };
       init = {
         defaultBranch = "main";

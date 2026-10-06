@@ -7,7 +7,7 @@
         doom-localleader-alt-key "M-SPC m"))
 
 ;; Personal information
-(setq user-full-name "Kiran Shila" user-mail-address "me@kiranshila.com")
+(setq user-full-name "Kira Shila" user-mail-address "me@kiranshila.com")
 
 ;; Fix Shell
 (setq shell-file-name (executable-find "bash"))

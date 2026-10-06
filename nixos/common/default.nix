@@ -184,11 +184,11 @@
   users = {
     # Define the plugdev group
     groups.plugdev = {};
-    # Kiran is always the default user
+    # Kira is always the default user
     users = {
       kiran = {
         isNormalUser = true;
-        description = "Kiran Shila";
+        description = "Kira Shila";
         extraGroups = [
           "wheel"
           "networkmanager"
