@@ -13,13 +13,7 @@
     tmux
     pciutils
     alejandra
-    (aspellWithDicts (
-      dicts:
-        with dicts; [
-          en
-          en-science
-        ]
-    ))
+    (aspellWithDicts (dicts: with dicts; [en]))
     unzip
     dosfstools
     mtools
