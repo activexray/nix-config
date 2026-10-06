@@ -30,7 +30,7 @@
       signature = {
         showSignature = "append";
         text = ''
-          Dr. Kira Shila (they/them/theirs)
+          Dr. Kira Shila (she/they)
           Research Engineer
           Deep Synoptic Array | Caltech
           T: +1 813-422-8343
