@@ -1,8 +1,8 @@
 {pkgs, ...}: let
   type = "caldav";
-  userName = "me@kiranshila.com";
+  userName = "me@4ktb.xyz";
   urlRoot = "https://cdav.migadu.com/calendars/${userName}";
-  passwordCommand = "${pkgs.pass}/bin/pass email/${userName}";
+  passwordCommand = "${pkgs.pass}/bin/pass migadu.com/${userName}";
 in {
   accounts.calendar.accounts = {
     Home = {

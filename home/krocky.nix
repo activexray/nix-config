@@ -67,8 +67,11 @@ in {
 
   # Enable just work email on work machine
   accounts.email.accounts = {
-    "me@kiranshila.com" = {
+    "me@4ktb.xyz" = {
       primary = false;
+      thunderbird.enable = false;
+    };
+    "me@kiranshila.com" = {
       thunderbird.enable = false;
     };
     "kshila@caltech.edu" = {

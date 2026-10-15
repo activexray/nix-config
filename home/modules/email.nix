@@ -6,12 +6,29 @@
   ...
 }: {
   accounts.email.accounts = {
-    "me@kiranshila.com" = {
+    "me@4ktb.xyz" = {
       primary = lib.mkDefault true;
+      address = "me@4ktb.xyz";
+      userName = "me@4ktb.xyz";
+      realName = "Kira Shila";
+      passwordCommand = "${pkgs.pass}/bin/pass migadu.com/me@4ktb.xyz";
+      imap = {
+        host = "imap.migadu.com";
+        port = 993;
+      };
+      smtp = {
+        host = "smtp.migadu.com";
+        port = 465;
+      };
+      thunderbird.enable = lib.mkDefault true;
+    };
+
+    "me@kiranshila.com" = {
+      # Legacy address: keep until mail/calendars are migrated, then delete
       address = "me@kiranshila.com";
       userName = "me@kiranshila.com";
       realName = "Kira Shila";
-      passwordCommand = "${pkgs.pass}/bin/pass email/me@kiranshila.com";
+      passwordCommand = "${pkgs.pass}/bin/pass migadu.com/me@kiranshila.com";
       imap = {
         host = "imap.migadu.com";
         port = 993;

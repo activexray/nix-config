@@ -2,8 +2,8 @@
 ;;
 ;; Copyright (C) 2025 Kira Shila
 ;;
-;; Author: Kira Shila <me@kiranshila.com>
-;; Maintainer: Kira Shila <me@kiranshila.com>
+;; Author: Kira Shila <me@4ktb.xyz>
+;; Maintainer: Kira Shila <me@4ktb.xyz>
 ;; Created: October 06, 2025
 ;; Modified: October 06, 2025
 ;; Version: 0.0.1
