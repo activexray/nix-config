@@ -71,9 +71,6 @@ in {
       primary = false;
       thunderbird.enable = false;
     };
-    "me@kiranshila.com" = {
-      thunderbird.enable = false;
-    };
     "kshila@caltech.edu" = {
       primary = true;
     };

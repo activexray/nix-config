@@ -23,23 +23,6 @@
       thunderbird.enable = lib.mkDefault true;
     };
 
-    "me@kiranshila.com" = {
-      # Legacy address: keep until mail/calendars are migrated, then delete
-      address = "me@kiranshila.com";
-      userName = "me@kiranshila.com";
-      realName = "Kira Shila";
-      passwordCommand = "${pkgs.pass}/bin/pass migadu.com/me@kiranshila.com";
-      imap = {
-        host = "imap.migadu.com";
-        port = 993;
-      };
-      smtp = {
-        host = "smtp.migadu.com";
-        port = 465;
-      };
-      thunderbird.enable = lib.mkDefault true;
-    };
-
     "kshila@caltech.edu" = {
       address = "kshila@caltech.edu";
       userName = "kshila@caltech.edu";
