@@ -408,15 +408,16 @@
         "uv2nix": "uv2nix"
       },
       "locked": {
-        "lastModified": 1794298210,
-        "narHash": "sha256-8nLx4N+I+7Hz/JRmNgLyjuF/h4fWmMKr4g8SPfRsHms=",
-        "owner": "marcinz606",
+        "lastModified": 1791670905,
+        "narHash": "sha256-+ssda7PJBYyahFquVga37DHVGjkBuy/XnATEv0a5c2M=",
+        "owner": "activexray",
         "repo": "NegPy",
-        "rev": "ae2be21873b43697de005420ce3880f99f9ae305",
+        "rev": "02c72488649164efe4740485ab4750161e14c32e",
         "type": "github"
       },
       "original": {
-        "owner": "marcinz606",
+        "owner": "activexray",
+        "ref": "fix/wgpu-rename",
         "repo": "NegPy",
         "type": "github"
       }

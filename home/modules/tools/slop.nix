@@ -4,14 +4,26 @@
   lib,
   ...
 }: {
+  programs.mcp = {
+    enable = true;
+    servers = {
+      ghidra-bridge = {
+        command = "${pkgs.uv}/bin/uv";
+        args = ["run" "--directory" "${config.home.homeDirectory}/src/ghidra-mcp" "bridge-mcp-ghidra"];
+      };
+    };
+  };
+
   programs.opencode = {
     enable = true;
     package = pkgs.llm-agents.opencode;
+    enableMcpIntegration = true;
   };
 
   programs.claude-code = {
     enable = true;
     package = pkgs.llm-agents.claude-code;
+    enableMcpIntegration = true;
     context = ./claude-contract.md;
     settings = {
       tui = "fullscreen";
