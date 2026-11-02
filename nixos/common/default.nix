@@ -126,6 +126,8 @@
       allowUnfree = true;
       # Workaround for https://github.com/nix-community/home-manager/issues/2942
       allowUnfreePredicate = _: true;
+      # onlyoffice-desktopeditors still needs gtk2 (nixpkgs#410814)
+      problems.handlers."gtk+".broken = "warn";
     };
   };
 
@@ -341,37 +343,4 @@
 
   # Tailscale
   services.tailscale.enable = true;
-
-  # iOS continuity for linux
-  programs.tether = {
-    enable = true;
-    wifi = {
-      enable = true;
-      openFirewall = true;
-    };
-    bluetooth = {
-      enable = true;
-      adapters = ["hci0"];
-    };
-    # native messaging extensions handled in home manager
-  };
-
-  # tether-btclass@hci0.service's own retry loop (10x1s) can lose the race
-  # against bluetoothd's startup right after `systemctl restart
-  # bluetooth.service`, and it has no Restart=, so it just gives up
-  # permanently, leaving the adapter's Class of Device at bluez's default
-  # instead of A/V Hands-Free (breaks MAP/PBAP). Let systemd retry it once
-  # bluetoothd is actually up.
-  #
-  # NB: this is a concrete unit (systemd.services."tether-btclass@hci0"),
-  # not a real systemd template — "tether-btclass@" (no instance) is a
-  # different, unrelated unit and won't override it.
-  systemd.services."tether-btclass@hci0" = {
-    serviceConfig = {
-      Restart = "on-failure";
-      RestartSec = "2s";
-    };
-    startLimitIntervalSec = 60;
-    startLimitBurst = 15;
-  };
 }

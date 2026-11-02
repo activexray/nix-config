@@ -22,7 +22,8 @@
 
     # NixGL
     nixgl = {
-      url = "github:TheTeXnician/nixGL/update-for-latest-nixpkgs";
+      # nix-community/nixGL#226 (aggregate of open PRs); #227 is patched in below
+      url = "github:catouc/nixGL";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -67,13 +68,6 @@
         nixpkgs.follows = "nixpkgs";
       };
     };
-
-    # Tether - iPhone/Linux Continuity (NixOS module for wifi/bluetooth wiring;
-    # the package itself already lives in nixpkgs as pkgs.tether)
-    tether = {
-      url = "github:zackb/tether";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs = {
@@ -90,7 +84,6 @@
     nixcord,
     llm-agents,
     negpy,
-    tether,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -109,15 +102,46 @@
     nixosModules = [
       determinate.nixosModules.default
       catppuccin.nixosModules.catppuccin
-      tether.nixosModules.default
     ];
 
+    # nixGL with nix-community/nixGL#227 (pcregrep -> pcre2grep; nixpkgs
+    # removed pcre) applied. nixgl.packages can't be patched in place, so
+    # rebuild it the same way nixGL's flake.nix does.
+    nixgl' = let
+      pkgs = nixpkgs.legacyPackages.x86_64-linux;
+      src = pkgs.applyPatches {
+        name = "nixGL-patched";
+        src = nixgl;
+        patches = [
+          (pkgs.fetchpatch {
+            url = "https://github.com/happy-dude/nixGL/commit/320297bd99179701d63e3670e64e636d6165afe2.patch";
+            hash = "sha256-WXuqzULt5sXe0LKgYYP7Vqbu87BHlKQfFthl/29/MlA=";
+          })
+        ];
+      };
+      gl = import "${src}/default.nix" {
+        inherit pkgs;
+        enable32bits = true;
+        enableIntelX86Extensions = true;
+      };
+    in
+      nixgl
+      // {
+        packages.x86_64-linux = rec {
+          default = nixGLDefault;
+          nixGLDefault = gl.auto.nixGLDefault;
+          nixGLNvidia = gl.auto.nixGLNvidia;
+          nixGLNvidiaBumblebee = gl.auto.nixGLNvidiaBumblebee;
+          nixGLIntel = gl.nixGLIntel;
+          nixVulkanNvidia = gl.auto.nixVulkanNvidia;
+          nixVulkanIntel = gl.nixVulkanIntel;
+        };
+      };
+
     overlays = [
-      nixgl.overlay
       nur.overlays.default
       (import ./overlays/cockatrice.nix)
       llm-agents.overlays.shared-nixpkgs
-      tether.overlays.default
     ];
 
     # A function to automatically set the hostname and hostname-derived config
@@ -129,7 +153,10 @@
         {
           home-manager = {
             # Just pass the whole input output sets to HM
-            extraSpecialArgs = {inherit inputs outputs nixgl stablePkgs;};
+            extraSpecialArgs = {
+              inherit inputs outputs stablePkgs;
+              nixgl = nixgl';
+            };
             useUserPackages = true;
             useGlobalPkgs = true;
             backupFileExtension = "backup";
@@ -168,6 +195,8 @@
         system = "x86_64-linux";
         config = {
           allowUnfree = true;
+          # onlyoffice-desktopeditors still needs gtk2 (nixpkgs#410814)
+          problems.handlers."gtk+".broken = "warn";
         };
         overlays = overlays;
       };
@@ -181,7 +210,8 @@
 
       # Passing along nixgl to the standalone
       extraSpecialArgs = {
-        inherit nixgl stablePkgs;
+        inherit stablePkgs;
+        nixgl = nixgl';
       };
     };
 
@@ -198,7 +228,7 @@
         } ''
           mkdir -p $out/bin
           for bin in ${pkg}/bin/*; do
-            makeWrapper "${nixgl.packages.x86_64-linux.nixGLDefault}/bin/nixGL" \
+            makeWrapper "${nixgl'.packages.x86_64-linux.nixGLDefault}/bin/nixGL" \
               "$out/bin/$(basename $bin)" \
               --add-flags "$bin"
           done

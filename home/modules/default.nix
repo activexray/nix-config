@@ -132,7 +132,6 @@
     ./apps/kitty.nix
     ./apps/openscad.nix
     ./apps/qtpass.nix
-    ./apps/tether.nix
     ./tools/cli.nix
     ./tools/fish.nix
     ./tools/git.nix
