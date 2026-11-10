@@ -141,6 +141,7 @@
     overlays = [
       nur.overlays.default
       (import ./overlays/cockatrice.nix)
+      (import ./overlays/neocmakelsp.nix)
       llm-agents.overlays.shared-nixpkgs
     ];
 
