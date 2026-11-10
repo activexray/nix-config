@@ -15,6 +15,11 @@ in {
   # Non-NixOS integration: XDG_DATA_DIRS, TERMINFO_DIRS, nix.sh sourcing
   targets.genericLinux.enable = true;
 
+  # Don't build a Nix mime.cache: shared-mime-info 2.5.1 inverts aliases vs.
+  # EL9's 2.1, and GIO merging both caches recurses until stack overflow
+  # (nautilus SIGSEGV in __gio_xdg_cache_mime_type_subclass).
+  xdg.mime.enable = false;
+
   # Setup NixGL
   targets.genericLinux.nixGL = {
     packages = nixgl.packages;
