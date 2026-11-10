@@ -46,6 +46,14 @@
     };
   };
 
+  # GnuPG 2.4 writes `use-keyboxd` here on fresh homedirs. With no-autostart
+  # above, gpg then can't reach keyboxd unless it's started by hand. Pin the
+  # file empty so every machine uses pubring.kbx.
+  home.file.".gnupg/common.conf" = {
+    text = "";
+    force = true;
+  };
+
   # Setup GPG Agent
   # Following Dr. Duh
   # https://raw.githubusercontent.com/drduh/config/master/gpg-agent.conf
@@ -58,8 +66,5 @@
     maxCacheTtl = 120;
     pinentry.package = lib.mkDefault pkgs.pinentry-qt;
     enableScDaemon = true;
-    extraConfig = ''
-      ttyname $GPG_TTY
-    '';
   };
 }

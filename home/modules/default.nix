@@ -124,6 +124,7 @@
   # Bring in everything else that might need more configuration
   imports = [
     ./email.nix
+    ./mime.nix
     ./apps/emacs
     ./apps/discord.nix
     ./apps/firefox/firefox.nix

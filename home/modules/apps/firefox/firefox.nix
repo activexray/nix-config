@@ -13,8 +13,10 @@ in {
     "Firefox: legacy profile directory '${legacyPath}' still exists. Move it to '${config.xdg.configHome}/mozilla/firefox' and remove the old directory."
   ];
   home.sessionVariables = {
-    DEFAULT_BROWSER = package;
-    BROWSER = package;
+    # Must be an executable, not the package dir; "firefox" resolves to the
+    # final programs.firefox wrapper on PATH.
+    DEFAULT_BROWSER = "firefox";
+    BROWSER = "firefox";
   };
   programs.firefox = {
     inherit package;

@@ -12,6 +12,9 @@
     folders."apybf-p3tmn".devices = names;
   };
 in {
+  # Non-NixOS integration: XDG_DATA_DIRS, TERMINFO_DIRS, nix.sh sourcing
+  targets.genericLinux.enable = true;
+
   # Setup NixGL
   targets.genericLinux.nixGL = {
     packages = nixgl.packages;

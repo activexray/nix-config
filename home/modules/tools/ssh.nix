@@ -14,6 +14,9 @@
       "*" = {
         IdentitiesOnly = true;
         IdentityFile = "~/.ssh/id_rsa_yubikey.pub";
+        # Always use gpg-agent, even when the session's SSH_AUTH_SOCK points
+        # elsewhere (GNOME keyring on Rocky is started by PAM and wins in GUI apps)
+        IdentityAgent = "\${XDG_RUNTIME_DIR}/gnupg/S.gpg-agent.ssh";
       };
 
       "ovro" = {

@@ -63,7 +63,6 @@
     };
     "browser.aboutConfig.showWarning" = false;
     "browser.urlbar.keepPanelOpenDuringImeComposition" = true;
-    "browser.newtabpage.activity-stream.showSearch" = false;
 
     # Auto enable the extensions
     "extensions.autoDisableScopes" = 0;
@@ -72,7 +71,6 @@
 
     # Enable custom stylesheet
     "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
-    "layout.css.has-selector.enabled" = true;
 
     # Calculator in URL bar
     "browser.urlbar.suggest.calculator" = true;
@@ -127,8 +125,8 @@
       # Disable all the stupid "This time, search with" icons
       bing.metaData.hidden = true;
       ebay.metaData.hidden = true;
-      amazondotcom.metaData.hidden = true;
       wikipedia.metaData.hidden = true;
+      perplexity.metaData.hidden = true;
 
       "Nix Packages" = {
         urls = [

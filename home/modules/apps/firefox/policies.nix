@@ -3,6 +3,20 @@
   DNSOverHTTPS = {
     Enabled = true;
     ProviderURL = "https://dns.mullvad.net/dns-query";
+    # Private names public DoH can't resolve (Tailscale MagicDNS, OVRO internal)
+    ExcludedDomains = ["ts.net" "ovro.pvt"];
+  };
+
+  # Single switch for all AI features (Firefox 149.0.2+); translations stay on
+  AIControls = {
+    Default = {
+      Value = "blocked";
+      Locked = true;
+    };
+    Translations = {
+      Value = "available";
+      Locked = false;
+    };
   };
   EnableTrackingProtection = {
     Value = true;
@@ -37,9 +51,11 @@
     TopSites = false;
     SponsoredTopSites = false;
     Highlights = false;
-    Pocket = false;
-    SponsoredPocket = false;
-    Snippets = false;
+    # Pocket/SponsoredPocket were renamed in Firefox 141; Snippets removed in 122
+    Stories = false;
+    SponsoredStories = false;
+    Weather = false; # Firefox 152+
+    Widgets.Enabled = false; # Firefox 156+
   };
 
   DisplayBookmarksToolbar = "never"; # I don't even really use bookmarks
@@ -56,6 +72,9 @@
   UserMessaging = {
     UrlbarInterventions = false;
     SkipOnboarding = true;
+    ExtensionRecommendations = false;
+    FeatureRecommendations = false;
+    MoreFromMozilla = false;
   };
 
   Extensions.Locked = [
