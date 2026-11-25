@@ -117,9 +117,15 @@
         # AirPods fail to pair/connect over dual-mode (they get picked up
         # over LE); force classic BR/EDR. Disables BLE-only devices.
         ControllerMode = "bredr";
+        # Advertise Apple's vendor ID in the DID profile so AirPods expose
+        # extra features (hearing aid, transparency tuning) to librepods
+        DeviceID = "bluetooth:004C:0000:0000";
       };
     };
   };
+
+  # AirPods control app; wrapper grants cap_net_admin to the librepods group
+  programs.librepods.enable = true;
 
   # Nixpkgs Configuration
   nixpkgs = {
@@ -198,6 +204,7 @@
           "plugdev"
           "libvirtd"
           "dialout"
+          "librepods"
         ];
       };
     };
