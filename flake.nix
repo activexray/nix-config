@@ -63,8 +63,7 @@
 
     # negpy
     negpy = {
-      # TODO: back to github:marcinz606/NegPy once fix/wgpu-rename is merged
-      url = "github:activexray/NegPy/fix/wgpu-rename";
+      url = "github:marcinz606/NegPy";
       inputs = {
         nixpkgs.follows = "nixpkgs";
       };

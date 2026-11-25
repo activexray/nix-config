@@ -1,7 +1,7 @@
 {
   lib,
   stdenv,
-  qt5,
+  qt6,
   fetchFromGitHub,
   cmake,
   protobuf_21,
@@ -10,28 +10,26 @@
 in
   stdenv.mkDerivation (finalAttrs: {
     pname = "cockatrice";
-    version = "2026-06-26-Release-3.0.2";
+    version = "2026-10-10-Release-3.1.1";
 
     src = fetchFromGitHub {
       owner = "Cockatrice";
       repo = "Cockatrice";
       rev = finalAttrs.version;
-      sha256 = "sha256-qn8pnC04uN994qLK4oXc3IiTpPMT3/gqHHBaEDkjsr4=";
+      sha256 = "sha256-Qr5f21SmGXqRxKsT/K47JBBz3X6skr9aNwTXITJA/X0=";
     };
-
-    patches = [./missing-qset-header.patch];
 
     nativeBuildInputs = [
       cmake
-      qt5.wrapQtAppsHook
+      qt6.wrapQtAppsHook
     ];
 
     buildInputs = [
-      qt5.qtbase
-      qt5.qtmultimedia
+      qt6.qtbase
+      qt6.qtmultimedia
+      qt6.qttools
+      qt6.qtwebsockets
       protobuf
-      qt5.qttools
-      qt5.qtwebsockets
     ];
 
     meta = {

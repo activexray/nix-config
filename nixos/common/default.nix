@@ -114,6 +114,9 @@
       General = {
         Experimental = true;
         Enable = "Source,Sink,Media,Socket";
+        # AirPods fail to pair/connect over dual-mode (they get picked up
+        # over LE); force classic BR/EDR. Disables BLE-only devices.
+        ControllerMode = "bredr";
       };
     };
   };
@@ -318,6 +321,22 @@
       "soft"
       "timeo=30" # 3s before retrying
       "retrans=2"
+    ];
+  };
+
+  # Nextcloud files dir (owned by www-data, uid 33) remapped to kiran for local editing
+  system.fsPackages = [ pkgs.bindfs ];
+  fileSystems."/mnt/nc" = {
+    device = "/mnt/storage/nextcloud/Kiran Shila/files";
+    fsType = "fuse.bindfs";
+    noCheck = true;
+    depends = [ "/mnt/storage" ];
+    options = [
+      "map=33/1000:@33/@100"
+      "allow_other"
+      "x-systemd.automount"
+      "noauto"
+      "nofail"
     ];
   };
 
